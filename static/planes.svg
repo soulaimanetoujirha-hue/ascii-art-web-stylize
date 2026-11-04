@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+  <!-- wall, window and floor planes; the sand corner on the left is left empty -->
+  <polygon points="22,0 100,0 100,28 22,45" fill="#e2d8c2"/>
+  <polygon points="22,0 36,0 36,41.95 22,45" fill="#c9bc9f"/>
+  <polygon points="0,100 22,45 100,28 100,100" fill="#cbbd9d"/>
+
+  <!-- window blinds and floorboards -->
+  <path d="M22 8H36M22 16H36M22 24H36M22 32H36M22 40H36" stroke="#1e1d1b" stroke-opacity=".2" vector-effect="non-scaling-stroke"/>
+  <path d="M20 100L43.9 40.2M40 100L65.8 35.45M60 100L87.7 30.68M80 100L100 50" stroke="#1e1d1b" stroke-opacity=".12" vector-effect="non-scaling-stroke"/>
+
+  <!-- main ink lines -->
+  <path d="M0 100L22 45L100 28M22 0V45M36 0V41.95" fill="none" stroke="#1e1d1b" stroke-width="2" vector-effect="non-scaling-stroke"/>
+</svg>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Code }} {{ .Title }} · ASCII Art Web</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='8' fill='%23dc6058'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@700&display=swap">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <main class="frame">
+        <section class="panel">
+            <a class="logo" href="/">Home</a>
+
+            <div class="intro">
+                <div class="badge" aria-hidden="true">!</div>
+                <p class="code">{{ .Code }}</p>
+                <h1>{{ .Title }}</h1>
+                <hr class="rule">
+                <p class="lead">{{ .Message }}</p>
+                <a class="go" href="/"><span class="go-icon" aria-hidden="true">←</span>Back to the generator</a>
+            </div>
+
+            <p class="status" data-state="error" role="status"><span>Error {{ .Code }} · {{ .Title }}</span></p>
+        </section>
+
+        <section class="stage">
+            {{ if .Art }}
+            <div class="floor" aria-hidden="true">
+                <div class="art-box"><pre id="art">{{ .Art }}</pre></div>
+            </div>
+            {{ end }}
+
+            <p class="credit">Made by <strong>Soul</strong> and <strong>Mo</strong></p>
+        </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

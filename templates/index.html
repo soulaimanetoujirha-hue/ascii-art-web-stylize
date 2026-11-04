@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Art Web</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><circle cx='8' cy='8' r='8' fill='%23dc6058'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:wght@700&display=swap">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <main class="frame">
+        <section class="panel">
+            <a class="logo" href="/">Home</a>
+
+            <div class="intro">
+                <div class="badge" aria-hidden="true">Aa</div>
+                <h1>Turn words into art</h1>
+                <hr class="rule">
+                <p class="quote">"Every letter is a little drawing waiting to happen."</p>
+                <p class="lead hint">Type anything, pick a font and hit generate. Press Enter for a new line.</p>
+
+                <form id="form" method="post" action="/ascii-art">
+                    <div>
+                        <label class="label" for="text">Your text</label>
+                        <textarea id="text" name="text" rows="3" required spellcheck="false" placeholder="Hello&#10;World">{{ .Text }}</textarea>
+                    </div>
+
+                    <fieldset class="fonts">
+                        <legend class="label">Font</legend>
+                        <div class="font-list">
+                            {{ range .Banners }}
+                            <input class="sr-only" type="radio" name="banner" id="font-{{ .Name }}" value="{{ .Name }}" {{ if eq .Name $.Banner }}checked{{ end }}>
+                            <label class="font-card" for="font-{{ .Name }}">
+                                <pre aria-hidden="true">{{ .Preview }}</pre>
+                                <span>{{ .Name }}</span>
+                            </label>
+                            {{ end }}
+                        </div>
+                    </fieldset>
+
+                    <button class="go" type="submit"><span class="go-icon" aria-hidden="true">→</span>Generate</button>
+                </form>
+            </div>
+
+            <p class="status" id="status" role="status"><span id="status-text">{{ if .Result }}Your art is ready · {{ .Banner }}{{ else }}Ready when you are{{ end }}</span></p>
+        </section>
+
+        <section class="stage" aria-label="Result">
+            <details class="help">
+                <summary><span class="help-icon" aria-hidden="true">?</span>Help</summary>
+                <div class="help-box">
+                    <p class="label">How it works</p>
+                    <ul>
+                        <li><kbd>Enter</kbd> starts a new line. Typing <code>\n</code> works too.</li>
+                        <li>Letters, numbers, spaces and symbols like <code>! ? # ~</code> can be drawn. Accents and emoji can't.</li>
+                        <li><kbd>Ctrl</kbd> + <kbd>Enter</kbd> generates without the mouse.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <p class="wall" aria-hidden="true">Standard · Shadow · Thinkertoy<small>Ninety-five characters, eight rows tall, one line at a time.</small></p>
+
+            {{ if .Result }}
+            <div class="floor">
+                <div class="art-box"><pre id="art">{{ .Result }}</pre></div>
+            </div>
+            <div class="actions">
+                <button class="icon-btn" id="copy" type="button" aria-label="Copy art" title="Copy art">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>
+                </button>
+                <button class="icon-btn" id="download" type="button" aria-label="Download as .txt" title="Download as .txt">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+                </button>
+                <a class="icon-btn" href="/" aria-label="Start over" title="Start over">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4h-4"/></svg>
+                </a>
+            </div>
+            {{ else }}
+            <p class="floor empty">Your art will stand here</p>
+            {{ end }}
+
+            <p class="credit">Made by <strong>Soul</strong> and <strong>Mo</strong></p>
+        </section>
+    </main>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
