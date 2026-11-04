@@ -21,6 +21,14 @@
     box-sizing: border-box;
 }
 
+/* The design is drawn for a 1440x900 window. On bigger screens 1rem grows with
+   the window (1.111vw = 16px at 1440 wide, 1.778vh = 16px at 900 tall), so
+   everything sized in rem or em scales up together. It never goes below the
+   browser's default size. */
+html {
+    font-size: max(100%, min(1.111vw, 1.778vh));
+}
+
 body {
     margin: 0;
     padding: var(--gap);
@@ -47,8 +55,8 @@ body {
 
 .frame {
     display: grid;
-    grid-template-columns: minmax(340px, 2fr) 3fr;
-    max-width: 1280px;
+    grid-template-columns: minmax(21rem, 2fr) 3fr;
+    max-width: 90rem;
     height: calc(100vh - 2 * var(--gap));
     margin: 0 auto;
     border: var(--line);

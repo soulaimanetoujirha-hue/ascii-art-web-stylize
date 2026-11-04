@@ -30,15 +30,16 @@ function checkInput() {
     say(count ? `${count} character${count === 1 ? "" : "s"} · ${font}` : "Ready when you are");
 }
 
-// Shrink the font until the art fits its box (down to 7px, then it scrolls).
+// Fit the art to its box. A monospace font grows in a straight line with its
+// size, so one measurement tells us how much to shrink. The biggest size
+// follows the page's rem (bigger screens, bigger art); the smallest is 7px,
+// after that the box scrolls.
 function fitArt() {
     const box = art.parentElement;
-    let size = 16;
-    art.style.fontSize = size + "px";
-    while (size > 7 && (art.offsetWidth > box.clientWidth || art.offsetHeight > box.clientHeight)) {
-        size -= 0.5;
-        art.style.fontSize = size + "px";
-    }
+    const biggest = parseFloat(getComputedStyle(document.documentElement).fontSize) * 1.25;
+    art.style.fontSize = biggest + "px";
+    const scale = Math.min(1, box.clientWidth / art.offsetWidth, box.clientHeight / art.offsetHeight);
+    art.style.fontSize = Math.max(7, Math.floor(biggest * scale * 0.97)) + "px";
 }
 
 if (form) {
