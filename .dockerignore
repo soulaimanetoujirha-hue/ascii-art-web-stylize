@@ -1,0 +1,12 @@
+# Keep the build context small: Docker only needs the Go files,
+# the templates, the static files and the three banners.
+.git
+.gitignore
+.dockerignore
+Dockerfile
+docker.sh
+README.md
+*_test.go
+.DS_Store
+.vscode
+.idea
